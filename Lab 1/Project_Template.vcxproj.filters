@@ -30,26 +30,44 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="helper\glutils.cpp">
-      <Filter>helper</Filter>
-    </ClCompile>
-    <ClCompile Include="helper\glslprogram.cpp">
-      <Filter>helper</Filter>
-    </ClCompile>
     <ClCompile Include="scenebasic_uniform.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="glad.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="torus.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="helper\cube.cpp">
+      <Filter>helper</Filter>
     </ClCompile>
-    <ClCompile Include="trianglemesh.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="helper\glslprogram.cpp">
+      <Filter>helper</Filter>
     </ClCompile>
-    <ClCompile Include="teapot.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="helper\glutils.cpp">
+      <Filter>helper</Filter>
+    </ClCompile>
+    <ClCompile Include="helper\objmesh.cpp">
+      <Filter>helper</Filter>
+    </ClCompile>
+    <ClCompile Include="helper\plane.cpp">
+      <Filter>helper</Filter>
+    </ClCompile>
+    <ClCompile Include="helper\skybox.cpp">
+      <Filter>helper</Filter>
+    </ClCompile>
+    <ClCompile Include="helper\teapot.cpp">
+      <Filter>helper</Filter>
+    </ClCompile>
+    <ClCompile Include="helper\texture.cpp">
+      <Filter>helper</Filter>
+    </ClCompile>
+    <ClCompile Include="helper\torus.cpp">
+      <Filter>helper</Filter>
+    </ClCompile>
+    <ClCompile Include="helper\trianglemesh.cpp">
+      <Filter>helper</Filter>
+    </ClCompile>
+    <ClCompile Include="helper\stb\stb_image.cpp">
+      <Filter>helper\stb</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -61,10 +79,55 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="scenebasic_uniform.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="helper\aabb.h">
+      <Filter>helper</Filter>
+    </ClInclude>
+    <ClInclude Include="helper\cube.h">
+      <Filter>helper</Filter>
+    </ClInclude>
+    <ClInclude Include="helper\drawable.h">
+      <Filter>helper</Filter>
+    </ClInclude>
+    <ClInclude Include="helper\glslprogram.h">
+      <Filter>helper</Filter>
+    </ClInclude>
+    <ClInclude Include="helper\glutils.h">
+      <Filter>helper</Filter>
+    </ClInclude>
+    <ClInclude Include="helper\objmesh.h">
+      <Filter>helper</Filter>
+    </ClInclude>
+    <ClInclude Include="helper\plane.h">
+      <Filter>helper</Filter>
+    </ClInclude>
     <ClInclude Include="helper\scene.h">
       <Filter>helper</Filter>
     </ClInclude>
     <ClInclude Include="helper\scenerunner.h">
+      <Filter>helper</Filter>
+    </ClInclude>
+    <ClInclude Include="helper\skybox.h">
+      <Filter>helper</Filter>
+    </ClInclude>
+    <ClInclude Include="helper\teapot.h">
+      <Filter>helper</Filter>
+    </ClInclude>
+    <ClInclude Include="helper\teapotdata.h">
+      <Filter>helper</Filter>
+    </ClInclude>
+    <ClInclude Include="helper\texture.h">
+      <Filter>helper</Filter>
+    </ClInclude>
+    <ClInclude Include="helper\torus.h">
+      <Filter>helper</Filter>
+    </ClInclude>
+    <ClInclude Include="helper\trianglemesh.h">
+      <Filter>helper</Filter>
+    </ClInclude>
+    <ClInclude Include="helper\utils.h">
       <Filter>helper</Filter>
     </ClInclude>
     <ClInclude Include="helper\stb\stb_image.h">
@@ -72,30 +135,6 @@
     </ClInclude>
     <ClInclude Include="helper\stb\stb_image_write.h">
       <Filter>helper\stb</Filter>
-    </ClInclude>
-    <ClInclude Include="helper\glutils.h">
-      <Filter>helper</Filter>
-    </ClInclude>
-    <ClInclude Include="helper\glslprogram.h">
-      <Filter>helper</Filter>
-    </ClInclude>
-    <ClInclude Include="scenebasic_uniform.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="teapot.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="teapotdata.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="torus.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="trianglemesh.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="drawable.h">
-      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
