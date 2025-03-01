@@ -47,8 +47,13 @@ void SceneBasic_Uniform::initScene()
     }*/
 
     //prog.setUniform("Light.Position", view * glm::vec4(5.0f, 5.0f, 2.0f, 1.0f));
-    prog.setUniform("Light.L", vec3(0.9f));
-    //prog.setUniform("Spot.La", vec3(0.5f));
+    //prog.setUniform("Light.L", vec3(0.9f));
+
+    prog.setUniform("Spot.L", vec3(0.5f));
+    prog.setUniform("Spot.La", vec3(0.5f));
+    prog.setUniform("Spot.Exponent", 0.5f);
+    prog.setUniform("Spot.Cutoff", glm::radians(30.0f));
+    
     //prog.setUniform("Fog.MaxDist", 20.0f);
     //prog.setUniform("Fog.MinDist", 1.0f);
     //prog.setUniform("Fog.Color", vec3(0.5f, 0.5f, 0.5f));
@@ -91,21 +96,26 @@ void SceneBasic_Uniform::render()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    vec4 lightPos = vec4(10.0f * cos(90.0f), 10.0f, 10.0f * sin(90.0f), 1.0f);
-    prog.setUniform("Light.Position", vec4(view * lightPos));
+    /*vec4 lightPos = vec4(10.0f * cos(90.0f), 10.0f, 10.0f * sin(90.0f), 1.0f);
+    prog.setUniform("Light.Position", vec4(view * lightPos));*/
+
+    vec4 lightPos = vec4(0.0f, 20.0f, 0.0f, 1.0f);
+    prog.setUniform("Spot.Position", vec3(view * lightPos));
+    mat3 normalMatrix = mat3(vec3(view[0]), vec3(view[1]), vec3(view[2]));
+    prog.setUniform("Spot.Direction", normalMatrix * vec3(-lightPos));
 
     prog.setUniform("Material.Kd", vec3(0.2f, 0.55f, 0.9f));
     prog.setUniform("Material.Ks", vec3(0.95f, 0.95f, 0.95f));
     prog.setUniform("Material.Ka", vec3(0.2f * 0.3f, 0.55f * 0.3f, 0.9f * 0.3f));
     prog.setUniform("Material.Shininess", 100.0f);
 
-    float dist = 0.0f;
+    //float dist = 0.0f;
 
-    /*model = mat4(1.0f);
-    model = glm::translate(model, vec3(dist * 0.6f - 1.0f, 0.0f, -dist));
-    model = glm::rotate(model, glm::radians(-90.0f), vec3(1.0f, 0.0f, 0.0f));
-    setMatrices();
-    teapot.render();*/
+    //model = mat4(1.0f);
+    //model = glm::translate(model, vec3(dist * 0.6f - 1.0f, 0.0f, -dist));
+    //model = glm::rotate(model, glm::radians(-90.0f), vec3(1.0f, 0.0f, 0.0f));
+    //setMatrices();
+    //teapot.render();
 
     prog.setUniform("Material.Kd", vec3(0.7f, 0.7f, 0.7f));
     prog.setUniform("Material.Ks", vec3(0.0f, 0.0f, 0.0f));
