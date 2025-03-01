@@ -16,8 +16,12 @@
 class SceneBasic_Uniform : public Scene
 {
 private:
+    //Torus torus;
     Plane plane;
-    Teapot teapot;
+    float tPrev;
+    std::unique_ptr<ObjMesh> mesh;
+    //Teapot teapot;
+    float angle;
 
     GLSLProgram prog;
     void setMatrices();

@@ -20,8 +20,11 @@ using glm::mat4;
 
 
 SceneBasic_Uniform::SceneBasic_Uniform() :
-    plane(50.0f, 50.0f, 1, 1),
-    teapot(14, glm::mat4(1.0f)) {
+    plane(50.0f, 50.0f, 1, 1), 
+    tPrev(0){
+    //teapot(14, glm::mat4(1.0f)) {
+    //torus(1.75f * 0.75f, 1.75f * 0.75f, 50, 50) {
+    mesh = ObjMesh::load("media/mazda.obj", true);
 }
 
 void SceneBasic_Uniform::initScene()
@@ -29,9 +32,34 @@ void SceneBasic_Uniform::initScene()
     compile();
     glEnable(GL_DEPTH_TEST);
     model = mat4(1.0f);
-    view = glm::lookAt(vec3(0.0f, 4.0f, 6.0f), vec3(0.0f, 0.2f, 0.0f), vec3(0.0f, 1.0f, 0.0f));
+    view = glm::lookAt(vec3(0.0f, 4.0f, 10.0f), vec3(0.0f, 0.2f, 0.0f), vec3(0.0f, 1.0f, 0.0f));
+    //model = glm::rotate(model, glm::radians(-35.0f), vec3(1.0f, 0.0f, 0.0f));
+    //model = glm::rotate(model, glm::radians(15.0f), vec3(0.0f, 1.0f, 0.0f));
     projection = mat4(1.0f);
+    angle = 0.0f;
+    /*float x, z;
+    for (int i = 0; i < 3; i++) {
+        std::stringstream name;
+        name << "lights[" << i << "].Position";
+        x = 2.0f * cosf((glm::two_pi <float>() / 3) * i);
+        z = 2.0f * sinf((glm::two_pi<float>() / 3) * i);
+        prog.setUniform(name.str().c_str(), view * glm::vec4(x, 1.2f, z + 1.0f, 1.0f));
+    }*/
+
+    //prog.setUniform("Light.Position", view * glm::vec4(5.0f, 5.0f, 2.0f, 1.0f));
     prog.setUniform("Light.L", vec3(0.9f));
+    //prog.setUniform("Spot.La", vec3(0.5f));
+    //prog.setUniform("Fog.MaxDist", 20.0f);
+    //prog.setUniform("Fog.MinDist", 1.0f);
+    //prog.setUniform("Fog.Color", vec3(0.5f, 0.5f, 0.5f));
+
+    /*prog.setUniform("lights[1].L", vec3(0.0f, 0.8f, 0.0f));
+    prog.setUniform("lights[2].L", vec3(0.8f, 0.0f, 0.0f));
+
+    prog.setUniform("lights[0].La", vec3(0.0f, 0.0f, 0.2f));
+    prog.setUniform("lights[1].La", vec3(0.0f, 0.2f, 0.0f));
+    prog.setUniform("lights[2].La", vec3(0.2f, 0.0f, 0.0f));*/
+
 
 }
 
@@ -52,6 +80,11 @@ void SceneBasic_Uniform::compile()
 void SceneBasic_Uniform::update(float t)
 {
     //update your angle here
+    float deltaT = t - tPrev;
+    if (tPrev == 0.0f) deltaT = 0.0f;
+    tPrev = t;
+    angle += 0.1f * deltaT;
+    if (angle > glm::two_pi<float>()) angle -= glm::two_pi<float>();
 }
 
 void SceneBasic_Uniform::render()
@@ -68,11 +101,11 @@ void SceneBasic_Uniform::render()
 
     float dist = 0.0f;
 
-    model = mat4(1.0f);
+    /*model = mat4(1.0f);
     model = glm::translate(model, vec3(dist * 0.6f - 1.0f, 0.0f, -dist));
     model = glm::rotate(model, glm::radians(-90.0f), vec3(1.0f, 0.0f, 0.0f));
     setMatrices();
-    teapot.render();
+    teapot.render();*/
 
     prog.setUniform("Material.Kd", vec3(0.7f, 0.7f, 0.7f));
     prog.setUniform("Material.Ks", vec3(0.0f, 0.0f, 0.0f));
@@ -82,6 +115,17 @@ void SceneBasic_Uniform::render()
     setMatrices();
     plane.render();
 
+    prog.setUniform("Material.Kd", vec3(1.0f, 0.0f, 0.0f));
+    prog.setUniform("Material.Ks", vec3(0.95f, 0.95f, 0.95f));
+    prog.setUniform("Material.Ka", vec3(0.2f, 0.2f, 0.2f));
+    prog.setUniform("Material.Shininess", 100.0f);
+    model = mat4(1.0f);
+
+    model = glm::rotate(model, glm::radians(angle * 100.0f), vec3(0.0f, 1.0f, 0.0f));
+    //model = glm::rotate(model, glm::radians(45.0f), vec3(0.0f, 1.0f, 0.0f));
+    model = glm::translate(model, vec3(0.0f, 2.0f, 0.0f));
+    setMatrices();
+    mesh->render();
 }
 
 void SceneBasic_Uniform::resize(int w, int h)
