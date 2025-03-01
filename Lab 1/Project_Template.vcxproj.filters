@@ -42,6 +42,15 @@
     <ClCompile Include="glad.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="torus.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="trianglemesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="teapot.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="shader\basic_uniform.frag">
@@ -72,6 +81,21 @@
     </ClInclude>
     <ClInclude Include="scenebasic_uniform.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="teapot.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="teapotdata.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="torus.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="trianglemesh.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="drawable.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
