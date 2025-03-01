@@ -99,7 +99,7 @@ void SceneBasic_Uniform::render()
     /*vec4 lightPos = vec4(10.0f * cos(90.0f), 10.0f, 10.0f * sin(90.0f), 1.0f);
     prog.setUniform("Light.Position", vec4(view * lightPos));*/
 
-    vec4 lightPos = vec4(0.0f, 20.0f, 0.0f, 1.0f);
+    vec4 lightPos = vec4(0.0f, 20.0f, 5.0f, 1.0f);
     prog.setUniform("Spot.Position", vec3(view * lightPos));
     mat3 normalMatrix = mat3(vec3(view[0]), vec3(view[1]), vec3(view[2]));
     prog.setUniform("Spot.Direction", normalMatrix * vec3(-lightPos));

@@ -13,7 +13,8 @@ uniform struct SpotLightInfo{
     float Cutoff;
 }Spot;
 
-
+const int levels = 5;
+const float scaleFactor = 1.0/levels;
 
 uniform struct MaterialInfo{
     vec3 Kd;
@@ -34,7 +35,7 @@ vec3 blinnPhong(vec3 position, vec3 n){
     if (angle>=0.0&&angle<Spot.Cutoff){
         spotScale=pow(cosAng, Spot.Exponent);
         float sDotN=max(dot(s,n),0.0);
-        diffuse=Material.Kd*sDotN;
+        diffuse=Material.Kd*floor(sDotN*levels)*scaleFactor;
         if (sDotN>0.0){
             vec3 v=normalize(-position.xyz);
             vec3 h=normalize(v+s);
