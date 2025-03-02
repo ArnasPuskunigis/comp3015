@@ -1,7 +1,9 @@
 #version 460
 in vec3 Position;
 in vec3 Normal;
+in vec2 TexCoord;
 
+layout (binding=0) uniform sampler2D Tex1;
 layout (location = 0) out vec4 FragColor;
 
 uniform struct SpotLightInfo{
@@ -25,7 +27,8 @@ uniform struct MaterialInfo{
 
 vec3 blinnPhong(vec3 position, vec3 n){
     vec3 diffuse=vec3(0),spec=vec3(0);
-    vec3 ambient=Spot.La*Material.Ka;
+    vec3 texColor = texture(Tex1, TexCoord).rgb;
+    vec3 ambient=Spot.La * texColor;
     vec3 s = normalize(Spot.Position-position);
 
     float cosAng=dot(-s,normalize(Spot.Direction));
@@ -35,7 +38,7 @@ vec3 blinnPhong(vec3 position, vec3 n){
     if (angle>=0.0&&angle<Spot.Cutoff){
         spotScale=pow(cosAng, Spot.Exponent);
         float sDotN=max(dot(s,n),0.0);
-        diffuse=Material.Kd*floor(sDotN*levels)*scaleFactor;
+        diffuse=texColor*floor(sDotN*levels)*scaleFactor;
         if (sDotN>0.0){
             vec3 v=normalize(-position.xyz);
             vec3 h=normalize(v+s);

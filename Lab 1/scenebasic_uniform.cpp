@@ -2,7 +2,7 @@
 
 #include <cstdio>
 #include <cstdlib>
-
+#include "helper/texture.h"
 #include <string>
 using std::string;
 
@@ -39,6 +39,11 @@ void SceneBasic_Uniform::initScene()
     angle = 0.0f;
     spin = true;
     camDistance = 10.0f;
+
+    GLuint texID = Texture::loadTexture("media/texture/brick1.jpg");
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, texID);
+
 
     /*float x, z;
     for (int i = 0; i < 3; i++) {
