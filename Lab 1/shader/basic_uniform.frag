@@ -3,7 +3,8 @@ in vec3 Position;
 in vec3 Normal;
 in vec2 TexCoord;
 
-layout (binding=0) uniform sampler2D Tex1;
+layout (binding=0) uniform sampler2D tilesTex;
+layout (binding=1) uniform sampler2D mossTex;
 layout (location = 0) out vec4 FragColor;
 
 uniform struct SpotLightInfo{
@@ -27,7 +28,9 @@ uniform struct MaterialInfo{
 
 vec3 blinnPhong(vec3 position, vec3 n){
     vec3 diffuse=vec3(0),spec=vec3(0);
-    vec3 texColor = texture(Tex1, TexCoord).rgb;
+    vec4 tilesTexColor = texture(tilesTex, TexCoord);
+    vec4 mossTexColor = texture(mossTex, TexCoord);
+    vec3 texColor=mix(tilesTexColor.rgb, mossTexColor.rgb, mossTexColor.a);
     vec3 ambient=Spot.La * texColor;
     vec3 s = normalize(Spot.Position-position);
 

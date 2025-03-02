@@ -41,10 +41,14 @@ void SceneBasic_Uniform::initScene()
     camDistance = 10.0f;
 
     prog.use();
-    GLuint texID = Texture::loadTexture("media/texture/brick1.jpg");
+    GLuint tiles = Texture::loadTexture("media/texture/tiles_d.png");
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT); // Repeat horizontally
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT); // Repeat vertically
+    GLuint moss = Texture::loadTexture("media/texture/rust.png");
     glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, texID);
-
+    glBindTexture(GL_TEXTURE_2D, tiles);
+    glActiveTexture(GL_TEXTURE1);
+    glBindTexture(GL_TEXTURE_2D, moss);
 
     /*float x, z;
     for (int i = 0; i < 3; i++) {
@@ -162,7 +166,7 @@ void SceneBasic_Uniform::render()
     prog.setUniform("Material.Kd", vec3(0.0f, 0.0f, 0.0f));
     prog.setUniform("Material.Ks", vec3(0.1f, 0.1f, 0.1f));
     prog.setUniform("Material.Ka", vec3(0.2f, 0.2f, 0.2f));
-    prog.setUniform("Material.Shininess", 180.0f);
+    prog.setUniform("Material.Shininess", 100.0f);
     model = mat4(1.0f);
     prog.use();
     setMatrices1();

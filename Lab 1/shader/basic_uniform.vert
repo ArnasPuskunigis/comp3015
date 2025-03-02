@@ -12,10 +12,11 @@ uniform mat4 ModelViewMatrix;
 uniform mat3 NormalMatrix;
 uniform mat4 ProjectionMatrix;
 uniform mat4 MVP;
+uniform float textureScale = 4.0;
 
 void main()
 {
-    TexCoord = VertexTexCoord;
+    TexCoord = VertexTexCoord * textureScale;
     Normal = normalize(NormalMatrix*VertexNormal);
     Position = (ModelViewMatrix*vec4(VertexPosition,1.0)).xyz;
    
