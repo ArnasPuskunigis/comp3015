@@ -24,9 +24,10 @@ private:
     float angle;
     bool spin;
     float camDistance;
-
     GLSLProgram prog;
-    void setMatrices();
+    GLSLProgram prog2;
+    void setMatrices1();
+    void setMatrices2();
     void compile();
 
 public:

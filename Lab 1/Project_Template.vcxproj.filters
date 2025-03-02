@@ -77,6 +77,12 @@
     <None Include="shader\basic_uniform.vert">
       <Filter>shaders</Filter>
     </None>
+    <None Include="shader\basic_uniform2.frag">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="shader\basic_uniform2.vert">
+      <Filter>shaders</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="scenebasic_uniform.h">
