@@ -12,11 +12,13 @@
 #include "glm/glm.hpp"
 #include "helper/plane.h"
 #include "helper/objmesh.h"
+#include "helper/skybox.h"
 
 class SceneBasic_Uniform : public Scene
 {
 private:
     //Torus torus;
+    SkyBox sky;
     Plane plane;
     float tPrev;
     std::unique_ptr<ObjMesh> mesh;
@@ -26,8 +28,10 @@ private:
     float camDistance;
     GLSLProgram prog;
     GLSLProgram prog2;
+    GLSLProgram prog3;
     void setMatrices1();
     void setMatrices2();
+    void setMatrices3();
     void compile();
 
 public:

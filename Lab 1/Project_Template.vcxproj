@@ -165,6 +165,8 @@
     <None Include="shader\basic_uniform.vert" />
     <None Include="shader\basic_uniform2.frag" />
     <None Include="shader\basic_uniform2.vert" />
+    <None Include="shader\basic_uniform3.frag" />
+    <None Include="shader\basic_uniform3.vert" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="helper\aabb.h" />

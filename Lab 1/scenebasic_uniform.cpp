@@ -20,16 +20,26 @@ using glm::mat4;
 
 
 SceneBasic_Uniform::SceneBasic_Uniform() :
-    plane(50.0f, 50.0f, 1, 1), 
+    sky(100.0f),
+    plane(100.0f, 100.0f, 1, 1), 
     tPrev(0){
     //teapot(14, glm::mat4(1.0f)) {
     //torus(1.75f * 0.75f, 1.75f * 0.75f, 50, 50) {
-    mesh = ObjMesh::load("media/pig_triangulated.obj", true);
+    mesh = ObjMesh::load("media/car.obj", true);
 }
 
 void SceneBasic_Uniform::initScene()
 {
     compile();
+
+    prog3.use();
+    GLuint cubeTex = Texture::loadHdrCubeMap("media/texture/cube/place/place");
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, cubeTex);
+
+    prog3.use();
+    prog3.setUniform("SkyBoxTex", 0);  // Skybox texture is bound to texture unit 0
+
     glEnable(GL_DEPTH_TEST);
     model = mat4(1.0f);
     view = glm::lookAt(vec3(0.0f, 4.0f, 10.0f), vec3(0.0f, 0.2f, 0.0f), vec3(0.0f, 1.0f, 0.0f));
@@ -41,13 +51,14 @@ void SceneBasic_Uniform::initScene()
     camDistance = 10.0f;
 
     prog.use();
+
     GLuint tiles = Texture::loadTexture("media/texture/tiles_d.png");
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT); // Repeat horizontally
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT); // Repeat vertically
     GLuint moss = Texture::loadTexture("media/texture/rust.png");
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, tiles);
     glActiveTexture(GL_TEXTURE1);
+    glBindTexture(GL_TEXTURE_2D, tiles);
+    glActiveTexture(GL_TEXTURE2);
     glBindTexture(GL_TEXTURE_2D, moss);
 
     /*float x, z;
@@ -108,9 +119,14 @@ void SceneBasic_Uniform::compile()
         prog2.compileShader("shader/basic_uniform2.frag");
         prog2.link();
         prog2.use();
+
+        prog3.compileShader("shader/basic_uniform3.vert");
+        prog3.compileShader("shader/basic_uniform3.frag");
+        prog3.link();
+        prog3.use();
     }
     catch (GLSLProgramException& e) {
-        std::cout << "failed to compile programs";
+        std::cerr << "Shader compilation failed: " << e.what() << std::endl;
     }
 }
 
@@ -130,6 +146,16 @@ void SceneBasic_Uniform::update(float t)
 void SceneBasic_Uniform::render()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    prog3.use();
+    model = mat4(1.0f);
+
+    prog3.use();
+    model = glm::translate(model, vec3(0.0f, 10.0f, 0.0f));
+    setMatrices3();
+    prog3.use();
+    sky.render();
+
 
     /*vec4 lightPos = vec4(10.0f * cos(90.0f), 10.0f, 10.0f * sin(90.0f), 1.0f);
     prog.setUniform("Light.Position", vec4(view * lightPos));*/
@@ -184,6 +210,8 @@ void SceneBasic_Uniform::render()
     model = glm::translate(model, vec3(0.0f, 2.0f, 0.0f));
     setMatrices2();
     mesh->render();
+
+    
 }
 
 void SceneBasic_Uniform::resize(int w, int h)
@@ -208,6 +236,14 @@ void SceneBasic_Uniform::setMatrices2() {
     prog2.setUniform("ModelViewMatrix", mv);
     prog2.setUniform("NormalMatrix", glm::mat3(vec3(mv[0]), vec3(mv[1]), vec3(mv[2])));
     prog2.setUniform("MVP", projection * mv);
+}
+
+void SceneBasic_Uniform::setMatrices3() {
+    prog3.use();
+    mat4 mv = view * model;
+    prog3.setUniform("ModelViewMatrix", mv);
+    prog3.setUniform("NormalMatrix", glm::mat3(vec3(mv[0]), vec3(mv[1]), vec3(mv[2])));
+    prog3.setUniform("MVP", projection * mv);
 }
 
 void SceneBasic_Uniform::upPressed() {
