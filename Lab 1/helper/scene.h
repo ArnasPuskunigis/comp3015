@@ -40,6 +40,10 @@ public:
       */
     virtual void resize(int, int) = 0;
     
+    virtual void upPressed() = 0;
+    virtual void spinToggle() = 0;
+    virtual void downPressed() = 0;
+
     void animate( bool value ) { m_animate = value; }
     bool animating() { return m_animate; }
     

@@ -22,6 +22,8 @@ private:
     std::unique_ptr<ObjMesh> mesh;
     //Teapot teapot;
     float angle;
+    bool spin;
+    float camDistance;
 
     GLSLProgram prog;
     void setMatrices();
@@ -34,6 +36,9 @@ public:
     void update(float t);
     void render();
     void resize(int, int);
+    void upPressed();
+    void downPressed();
+    void spinToggle();
 };
 
 #endif // SCENEBASIC_UNIFORM_H

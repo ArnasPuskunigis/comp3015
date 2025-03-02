@@ -24,7 +24,7 @@ SceneBasic_Uniform::SceneBasic_Uniform() :
     tPrev(0){
     //teapot(14, glm::mat4(1.0f)) {
     //torus(1.75f * 0.75f, 1.75f * 0.75f, 50, 50) {
-    mesh = ObjMesh::load("media/mazda.obj", true);
+    mesh = ObjMesh::load("media/car.obj", true);
 }
 
 void SceneBasic_Uniform::initScene()
@@ -37,6 +37,9 @@ void SceneBasic_Uniform::initScene()
     //model = glm::rotate(model, glm::radians(15.0f), vec3(0.0f, 1.0f, 0.0f));
     projection = mat4(1.0f);
     angle = 0.0f;
+    spin = true;
+    camDistance = 10.0f;
+
     /*float x, z;
     for (int i = 0; i < 3; i++) {
         std::stringstream name;
@@ -85,11 +88,14 @@ void SceneBasic_Uniform::compile()
 void SceneBasic_Uniform::update(float t)
 {
     //update your angle here
-    float deltaT = t - tPrev;
-    if (tPrev == 0.0f) deltaT = 0.0f;
-    tPrev = t;
-    angle += 0.1f * deltaT;
-    if (angle > glm::two_pi<float>()) angle -= glm::two_pi<float>();
+
+    if (spin) {
+        float deltaT = t - tPrev;
+        if (tPrev == 0.0f) deltaT = 0.0f;
+        tPrev = t;
+        angle += 0.1f * deltaT;
+        if (angle > glm::two_pi<float>()) angle -= glm::two_pi<float>();
+    }
 }
 
 void SceneBasic_Uniform::render()
@@ -98,6 +104,8 @@ void SceneBasic_Uniform::render()
 
     /*vec4 lightPos = vec4(10.0f * cos(90.0f), 10.0f, 10.0f * sin(90.0f), 1.0f);
     prog.setUniform("Light.Position", vec4(view * lightPos));*/
+
+    view = glm::lookAt(vec3(0.0f, 4.0f, camDistance), vec3(0.0f, 0.2f, 0.0f), vec3(0.0f, 1.0f, 0.0f));
 
     vec4 lightPos = vec4(0.0f, 20.0f, 5.0f, 1.0f);
     prog.setUniform("Spot.Position", vec3(view * lightPos));
@@ -152,4 +160,21 @@ void SceneBasic_Uniform::setMatrices() {
     prog.setUniform("ModelViewMatrix", mv);
     prog.setUniform("NormalMatrix", glm::mat3(vec3(mv[0]), vec3(mv[1]), vec3(mv[2])));
     prog.setUniform("MVP", projection * mv);
+}
+
+void SceneBasic_Uniform::upPressed() {
+    camDistance -= 0.1f;
+}
+
+void SceneBasic_Uniform::spinToggle() {
+    if (spin) {
+        spin = false;
+    }
+    else {
+        spin = true;
+    }
+}
+
+void SceneBasic_Uniform::downPressed() {
+    camDistance += 0.1f;
 }

@@ -124,10 +124,25 @@ private:
             scene.render();
             glfwSwapBuffers(window);
 
+            glfwSetWindowUserPointer(window, &scene);
+
             glfwPollEvents();
 			int state = glfwGetKey(window, GLFW_KEY_SPACE);
 			if (state == GLFW_PRESS)
 				scene.animate(!scene.animating());
+
+            if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS) {
+                scene.upPressed();
+            }
+            
+            if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
+                scene.spinToggle();
+            }
+
+            if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) {
+                scene.downPressed();
+            }
+
         }
     }
 };
