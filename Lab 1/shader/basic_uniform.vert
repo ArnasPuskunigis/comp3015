@@ -12,7 +12,7 @@ uniform mat4 ModelViewMatrix;
 uniform mat3 NormalMatrix;
 uniform mat4 ProjectionMatrix;
 uniform mat4 MVP;
-uniform float textureScale = 4.0;
+uniform float textureScale = 8.0;
 
 void main()
 {
