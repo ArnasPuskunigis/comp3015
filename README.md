@@ -5,6 +5,12 @@ This is my repository for my OpenGL program.
 - The os is Widnows 11, I am using an Nvidia 40 series card with OpenGL 4.6.
 - I used visual studio 2022 to write and test the code locally.
 
+# Inspiration
+
+When I was learning about blinn phong lighting, the effect blew me away, I thought wow this would look good on a car model, and it did.
+Then I found out how easy it is to make toon shading in OpenGL, I remember it being very difficult to implement in Unity some time ago.
+Therefore I decided to make a car inspector in OpenGL which lets you look at your car models in the toon shaded render.
+
 # How it works
 The code works by creating a scene in main which constructs an OpenGL window though which you see the application.
 It then compiles some shader programs, these require .vert and .frag shader files.
@@ -24,6 +30,8 @@ There are also 2 combined textures on the plane which are the tiles and the rust
 You can also see that the shades of blue are hard not soft, this means that toon shading is in effect.
 
 - As for the skybox, it is very simple, it just loads a set of images and consructs a cube out of them which the player sits inside making it look like the environnment.
+
+If you navigate to the media folder within the executable, you can find the car.obj file, if you were to find any other .obj file on the internet and place it in the same folder with the name car.obj and deleted the old one, then if you run the program, you will be able to inspect your model in the program with toon shading.
 
 ## Controls
 
