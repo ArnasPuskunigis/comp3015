@@ -83,8 +83,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>C:\Dependencies\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Dependencies\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\Public\OpenGL\include;C:\Dependencies\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Public\OpenGL\lib;C:\Dependencies\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -161,12 +161,12 @@
     <ClCompile Include="scenebasic_uniform.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="shader\basic_uniform.frag" />
-    <None Include="shader\basic_uniform.vert" />
-    <None Include="shader\basic_uniform2.frag" />
-    <None Include="shader\basic_uniform2.vert" />
-    <None Include="shader\basic_uniform3.frag" />
-    <None Include="shader\basic_uniform3.vert" />
+    <None Include="shader\multiTextureSpotToon.frag" />
+    <None Include="shader\multiTextureSpotToon.vert" />
+    <None Include="shader\toonSpotSingleColor.frag" />
+    <None Include="shader\toonSpotSingleColor.vert" />
+    <None Include="shader\skyBox.frag" />
+    <None Include="shader\skyBox.vert" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="helper\aabb.h" />

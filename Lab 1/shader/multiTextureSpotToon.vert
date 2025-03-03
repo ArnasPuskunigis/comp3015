@@ -21,5 +21,4 @@ void main()
     Position = (ModelViewMatrix*vec4(VertexPosition,1.0)).xyz;
    
     gl_Position = MVP * vec4(VertexPosition,1.0);
-
 }

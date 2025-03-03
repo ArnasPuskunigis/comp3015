@@ -7,8 +7,6 @@
 #include "helper/glslprogram.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-#include "helper/torus.h"
-#include "helper/teapot.h"
 #include "glm/glm.hpp"
 #include "helper/plane.h"
 #include "helper/objmesh.h"
@@ -17,21 +15,19 @@
 class SceneBasic_Uniform : public Scene
 {
 private:
-    //Torus torus;
     SkyBox sky;
     Plane plane;
     float tPrev;
     std::unique_ptr<ObjMesh> mesh;
-    //Teapot teapot;
     float angle;
     bool spin;
     float camDistance;
-    GLSLProgram prog;
-    GLSLProgram prog2;
-    GLSLProgram prog3;
-    void setMatrices1();
-    void setMatrices2();
-    void setMatrices3();
+    GLSLProgram planeProg;
+    GLSLProgram carProg;
+    GLSLProgram skyboxProg;
+    void setMatricesPlane();
+    void setMatricesCar();
+    void setMatricesSkybox();
     void compile();
 
 public:

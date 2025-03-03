@@ -71,22 +71,22 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="shader\basic_uniform.frag">
+    <None Include="shader\multiTextureSpotToon.frag">
       <Filter>shaders</Filter>
     </None>
-    <None Include="shader\basic_uniform.vert">
+    <None Include="shader\multiTextureSpotToon.vert">
       <Filter>shaders</Filter>
     </None>
-    <None Include="shader\basic_uniform2.frag">
+    <None Include="shader\toonSpotSingleColor.frag">
       <Filter>shaders</Filter>
     </None>
-    <None Include="shader\basic_uniform2.vert">
+    <None Include="shader\toonSpotSingleColor.vert">
       <Filter>shaders</Filter>
     </None>
-    <None Include="shader\basic_uniform3.frag">
+    <None Include="shader\skyBox.frag">
       <Filter>shaders</Filter>
     </None>
-    <None Include="shader\basic_uniform3.vert">
+    <None Include="shader\skyBox.vert">
       <Filter>shaders</Filter>
     </None>
   </ItemGroup>
